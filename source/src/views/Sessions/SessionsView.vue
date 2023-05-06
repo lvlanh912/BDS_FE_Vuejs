@@ -2,7 +2,7 @@
  <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">{{content}}</h1>
-    <p class="mb-4">Thêm sửa xoá, cập nhật tài khoản của các thành viên trong trang web tại đây </p>
+    <p class="mb-4">Xem và xoá Session đăng nhập của trang web tại đây </p>
 
     <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -28,8 +28,8 @@
               </div>
               <div class="col-sm-12 col-md-6">
                 <div id="dataTable_filter" class="dataTables_filter">
-                  <label>Search:
-                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable">
+                  <label>Tìm kiếm:
+                    <input type="search" class="form-control form-control-sm" placeholder="Bạn cần tìm gì?" aria-controls="dataTable">
                   </label>
                 </div>
               </div>
@@ -63,9 +63,9 @@
                   </tr>
               </thead>
               <tfoot>
-                  <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th></tr>
+                  <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th><th rowspan="1" colspan="1">Tuỳ chọn</th></tr>
               </tfoot>
-              <tbody>
+            <tbody>
               <tr class="odd">
                       <td class="sorting_1">Airi Satou</td>
                       <td>Accountant</td>
@@ -73,70 +73,22 @@
                       <td>33</td>
                       <td>2008/11/28</td>
                       <td>$162,700</td>
-                  </tr><tr class="even">
-                      <td class="sorting_1">Angelica Ramos</td>
-                      <td>Chief Executive Officer (CEO)</td>
-                      <td>London</td>
-                      <td>47</td>
-                      <td>2009/10/09</td>
-                      <td>$1,200,000</td>
-                  </tr><tr class="odd">
-                      <td class="sorting_1">Ashton Cox</td>
-                      <td>Junior Technical Author</td>
-                      <td>San Francisco</td>
-                      <td>66</td>
-                      <td>2009/01/12</td>
-                      <td>$86,000</td>
-                  </tr><tr class="even">
-                      <td class="sorting_1">Bradley Greer</td>
-                      <td>Software Engineer</td>
-                      <td>London</td>
-                      <td>41</td>
-                      <td>2012/10/13</td>
-                      <td>$132,000</td>
-                  </tr><tr class="odd">
-                      <td class="sorting_1">Brenden Wagner</td>
-                      <td>Software Engineer</td>
-                      <td>San Francisco</td>
-                      <td>28</td>
-                      <td>2011/06/07</td>
-                      <td>$206,850</td>
-                  </tr><tr class="even">
-                      <td class="sorting_1">Brielle Williamson</td>
-                      <td>Integration Specialist</td>
-                      <td>New York</td>
-                      <td>61</td>
-                      <td>2012/12/02</td>
-                      <td>$372,000</td>
-                  </tr><tr class="odd">
-                      <td class="sorting_1">Bruno Nash</td>
-                      <td>Software Engineer</td>
-                      <td>London</td>
-                      <td>38</td>
-                      <td>2011/05/03</td>
-                      <td>$163,500</td>
-                  </tr><tr class="even">
-                      <td class="sorting_1">Caesar Vance</td>
-                      <td>Pre-Sales Support</td>
-                      <td>New York</td>
-                      <td>21</td>
-                      <td>2011/12/12</td>
-                      <td>$106,450</td>
-                  </tr><tr class="odd">
-                      <td class="sorting_1">Cara Stevens</td>
-                      <td>Sales Assistant</td>
-                      <td>New York</td>
-                      <td>46</td>
-                      <td>2011/12/06</td>
-                      <td>$145,600</td>
-                  </tr><tr class="even">
-                      <td class="sorting_1">Cedric Kelly</td>
-                      <td>Senior Javascript Developer</td>
-                      <td>Edinburgh</td>
-                      <td>22</td>
-                      <td>2012/03/29</td>
-                      <td>$433,060</td>
-                  </tr></tbody>
+                      <td>
+                        <a href="#" class="btn btn-success btn-sm px-2 mx-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                              <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                            </svg>
+                            Sửa
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm px-2 mx-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2-fill" viewBox="0 0 16 16">
+                          <path d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z"/>
+                          </svg>
+                          Xoá
+                        </a>
+                      </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -153,10 +105,10 @@
 // @ is an alias to /src
 
 export default {
-  name: 'usersView',
+  name: 'SessionsView',
   data(){
     return{
-       content:"Quản lý tài khoản"
+       content:"Quản lý Session"
     }
   },
   components: {

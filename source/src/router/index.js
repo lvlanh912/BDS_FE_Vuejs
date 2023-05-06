@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 const routes = [
   {
-    path: '/admin',
+    path: '/',
     name: 'home',
     component: HomeView
   },
@@ -15,25 +15,31 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/admin/users',
+    path: '/users',
     name: 'users',
-    component: ()=>import('../views/UsersView.vue')
+    component: ()=>import('../views/Users/UsersView.vue')
   },
   {
-    path: '/admin/news',
+    path: '/news',
     name: 'news',
-    component: ()=>import('../views/NewsView.vue')
+    component: ()=>import('../views/News/NewsView.vue')
   },
   {
-    path: '/admin/properties',
+    path: '/properties',
     name: 'properties',
-    component: ()=>import('../views/PropertiesView.vue')
+    component: ()=>import('../views/Properties/PropertiesView.vue')
   },
   {
-    path: '/admin/sessions',
+    path: '/sessions',
     name: 'sessions',
-    component: ()=>import('../views/SessionsView.vue')
+    component: ()=>import('../views/Sessions/SessionsView.vue')
+  },
+  {
+    path: '/users/Userinfor',
+    name: 'Userinfor',
+    component: ()=>import('../views/Users/InforUser.vue')
   }
+  
 ]
 
 const router = createRouter({

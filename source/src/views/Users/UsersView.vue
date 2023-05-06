@@ -1,0 +1,247 @@
+<template>
+ <div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">{{content}}</h1>
+    <p class="mb-4">Thêm sửa xoá, cập nhật tài khoản của các thành viên trong trang web tại đây </p>
+    <div class="container position-fixed px-2 py-2 top-50 start-50 Showtop" >
+   <!-- Form -->
+        <div class="row justify-content-center" v-show="IsShowForm">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                    <div class="col-lg-6">
+								<div class="float-right py-3 px-2" >
+									<span class="mr-4 bg-light" @click="IsShowForm=!IsShowForm" >Đóng</span>
+								</div>
+                <div class="p-5">
+									<div class="text-center">
+										<h1 class="h4 text-gray-900 mb-4">Tạo tài khoản thành viên mới</h1>
+									</div>
+										<form class="user" @submit.prevent="Save">
+											<div class="form-group">
+												<label class="mx-2"> Tên đăng nhập</label>
+												<input type="text" class="form-control form-control-user" id="exampleInputEmail" v-model="User.UserName"
+                          placeholder="Nhập tên đăng nhập..."
+                        />
+											</div>
+											<div class="form-group">
+												<label class="mx-2"> Mật khẩu</label>
+												<input type="password" class="form-control form-control-user" id="exampleInputPassword" v-model="User.Password" placeholder="Nhập mật khẩu...">
+											</div>
+											<div class="form-group">
+												<label class="mx-2"> Họ và tên</label>
+												<input type="text" class="form-control form-control-user" id="fullname" v-model="User.FullName"  placeholder="Nhập họ tên...">
+											</div>
+											 <div class="form-group">
+												<label class="mx-2"> Số điện thoại</label>
+												<input type="tel" class="form-control form-control-user" id="exampleInputEmail" v-model="User.Phone"  placeholder="Nhập số điện thoại...">
+											</div>
+                       <div class="form-group">
+												<label class="mx-2"> Email</label>
+												<input type="email" class="form-control form-control-user" id="exampleInputEmail" v-model="User.Email"  placeholder="Nhập Email...">
+											</div>
+                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                        Tạo
+                        </button>
+											<!--
+											<div class="form-group">
+												<div class="custom-control custom-checkbox small">
+													<input type="checkbox" class="custom-control-input" id="customCheck">
+													<label class="custom-control-label" for="customCheck">Remember
+														Me</label>
+												</div>
+											</div>
+											<a href="index.html" class="btn btn-primary btn-user btn-block">
+												Login
+											</a>
+											<hr>
+											<a href="index.html" class="btn btn-google btn-user btn-block">
+												<i class="fab fa-google fa-fw"></i> Login with Google
+											</a>
+											<a href="index.html" class="btn btn-facebook btn-user btn-block">
+												<i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+											</a>
+									   
+										<hr>
+										<div class="text-center">
+											<a class="small" href="forgot-password.html">Forgot Password?</a>
+										</div>
+										<div class="text-center">
+											<a class="small" href="register.html">Create an Account!</a>
+										</div>
+											-->
+									</form>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    <!-- /Form -->
+    </div>
+    <!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách các tài khoản</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+          <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="dataTables_length" id="dataTable_length">
+                  <label>Show 
+                      <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                      </select> 
+                    entries
+                    </label>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6 inline-flex">
+                <div id="dataTable_filter" class="dataTables_filter">
+                  <label>Tìm kiếm:
+                    <input type="search" class="form-control form-control-sm" placeholder="Bạn cần tìm gì?" aria-controls="dataTable">
+                  </label>
+                  <div class="my-3 float-right">
+                <button type="button" class="btn btn-success" @click="IsShowForm=!IsShowForm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-database-fill-add" viewBox="0 0 16 16">
+                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0ZM8 1c-1.573 0-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4s.875 1.755 1.904 2.223C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777C13.125 5.755 14 5.007 14 4s-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1Z"></path>
+                <path d="M2 7v-.839c.457.432 1.004.751 1.49.972C4.722 7.693 6.318 8 8 8s3.278-.307 4.51-.867c.486-.22 1.033-.54 1.49-.972V7c0 .424-.155.802-.411 1.133a4.51 4.51 0 0 0-4.815 1.843A12.31 12.31 0 0 1 8 10c-1.573 0-3.022-.289-4.096-.777C2.875 8.755 2 8.007 2 7Zm6.257 3.998L8 11c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V10c0 1.007.875 1.755 1.904 2.223C4.978 12.711 6.427 13 8 13h.027a4.552 4.552 0 0 1 .23-2.002Zm-.002 3L8 14c-1.682 0-3.278-.307-4.51-.867-.486-.22-1.033-.54-1.49-.972V13c0 1.007.875 1.755 1.904 2.223C4.978 15.711 6.427 16 8 16c.536 0 1.058-.034 1.555-.097a4.507 4.507 0 0 1-1.3-1.905Z"></path>
+              </svg>
+                Thêm tài khoản mới
+              </button>
+              </div>
+                </div>
+              
+              </div>
+            </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+              <thead>
+                  <tr role="row">
+                    <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 121.2px;">
+                      Username
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 190.2px;">
+                      Password
+                      </th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 83.2px;">
+                      Email
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 32.2px;">
+                      Full Name
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 78.2px;">
+                      Phone Number
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 69.2px;">
+                      Ngày khởi tạo
+                    </th>
+                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 69.2px;">
+                      Tuỳ chọn
+                    </th>
+                  </tr>
+              </thead>
+              <tfoot>
+                  <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th><th rowspan="1" colspan="1">Tuỳ chọn</th></tr>
+              </tfoot>
+            <tbody>
+              <tr class="odd">
+                      <td class="sorting_1">Airi Satou</td>
+                      <td>Accountant</td>
+                      <td>Tokyo</td>
+                      <td>33</td>
+                      <td>2008/11/28</td>
+                      <td>$162,700</td>
+                      <td>
+                        <router-link  to='/users/Userinfor' class="btn btn-warning btn-sm px-2 mx-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                              <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                            </svg>
+                            Sửa
+                        </router-link>
+                        <button type="submit" class="btn btn-danger btn-sm px-2 mx-1" >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash2-fill" viewBox="0 0 16 16">
+                          <path d="M2.037 3.225A.703.703 0 0 1 2 3c0-1.105 2.686-2 6-2s6 .895 6 2a.702.702 0 0 1-.037.225l-1.684 10.104A2 2 0 0 1 10.305 15H5.694a2 2 0 0 1-1.973-1.671L2.037 3.225zm9.89-.69C10.966 2.214 9.578 2 8 2c-1.58 0-2.968.215-3.926.534-.477.16-.795.327-.975.466.18.14.498.307.975.466C5.032 3.786 6.42 4 8 4s2.967-.215 3.926-.534c.477-.16.795-.327.975-.466-.18-.14-.498-.307-.975-.466z"/>
+                          </svg>
+                          Xoá
+                        </button>
+                      </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-5">
+      <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+      </div>
+    </div>
+</div>
+</div>
+</template>
+
+<script>
+// @ is an alias to /src
+import InforUser from './InforUser.vue'
+export default {
+  name: 'usersView',
+  data(){
+    return{
+      
+      User:{
+        Id:'',
+        UserName:'',
+        Password:'',
+        Email:'',
+        FullName:'',
+        Phone:''
+      },
+       content:"Quản lý tài khoản",
+       IsShowForm:false
+    }
+  },
+  components: {
+    InforUser
+  },
+  methods:{
+    validate(){
+      if(!this.User.UserName)
+        alert('Username không được để trống')
+      else if(!this.User.Password)
+        alert('vui lòng nhập mật khẩu')
+      else if(!this.User.Email)
+      alert('vui lòng nhập email')
+      else if(!this.User.FullName)
+      alert('vui lòng nhập Họ tên')
+       else if(!this.User.Phone)
+      alert('vui lòng nhập Số điện thoại')
+      
+      
+    },
+    Save(){
+      this.validate()
+      console.log(this.User)
+    },
+    Delete(){
+      alert('Đã xoá')
+    }
+  }
+ 
+}
+</script>
+<style  scoped>
+.Showtop{
+z-index: 100;
+}
+</style>
