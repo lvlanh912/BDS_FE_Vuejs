@@ -1,10 +1,7 @@
 <template>
  <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">{{content}}</h1>
-    <p class="mb-4">Thêm sửa xoá, cập nhật tài khoản của các thành viên trong trang web tại đây </p>
-    <div class="container position-fixed px-2 py-2 top-50 start-50 Showtop" >
-   <!-- Form -->
+     <!-- Form -->
         <div class="row justify-content-center" v-show="IsShowForm">
             <div class="col-xl-10 col-lg-12 col-md-9">
                 <div class="card o-hidden border-0 shadow-lg my-5">
@@ -23,25 +20,25 @@
 										<form class="user" @submit.prevent="Save">
 											<div class="form-group">
 												<label class="mx-2"> Tên đăng nhập</label>
-												<input type="text" class="form-control form-control-user" id="exampleInputEmail" v-model="User.UserName"
+												<input type="text" class="form-control form-control-user" id="exampleInputEmail" v-model="UserSends.username"
                           placeholder="Nhập tên đăng nhập..."
                         />
 											</div>
 											<div class="form-group">
 												<label class="mx-2"> Mật khẩu</label>
-												<input type="password" class="form-control form-control-user" id="exampleInputPassword" v-model="User.Password" placeholder="Nhập mật khẩu...">
+												<input type="password" class="form-control form-control-user" id="exampleInputPassword" v-model="UserSends.password" placeholder="Nhập mật khẩu...">
 											</div>
 											<div class="form-group">
 												<label class="mx-2"> Họ và tên</label>
-												<input type="text" class="form-control form-control-user" id="fullname" v-model="User.FullName"  placeholder="Nhập họ tên...">
+												<input type="text" class="form-control form-control-user" id="fullname" v-model="UserSends.fullname"  placeholder="Nhập họ tên...">
 											</div>
 											 <div class="form-group">
 												<label class="mx-2"> Số điện thoại</label>
-												<input type="tel" class="form-control form-control-user" id="exampleInputEmail" v-model="User.Phone"  placeholder="Nhập số điện thoại...">
+												<input type="tel" class="form-control form-control-user" id="exampleInputEmail" v-model="UserSends.phone"  placeholder="Nhập số điện thoại...">
 											</div>
                        <div class="form-group">
 												<label class="mx-2"> Email</label>
-												<input type="email" class="form-control form-control-user" id="exampleInputEmail" v-model="User.Email"  placeholder="Nhập Email...">
+												<input type="email" class="form-control form-control-user" id="exampleInputEmail" v-model="UserSends.email"  placeholder="Nhập Email...">
 											</div>
                         <button type="submit" class="btn btn-primary btn-user btn-block">
                         Tạo
@@ -83,6 +80,10 @@
             </div>
         </div>
     <!-- /Form -->
+    <h1 class="h3 mb-2 text-gray-800">{{content}}</h1>
+    <p class="mb-4">Thêm sửa xoá, cập nhật tài khoản của các thành viên trong trang web tại đây </p>
+    <div class="container position-fixed px-2 py-2 top-50 start-50 Showtop" >
+  
     </div>
     <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -96,7 +97,7 @@
               <div class="col-sm-12 col-md-6">
                 <div class="dataTables_length" id="dataTable_length">
                   <label>Show 
-                      <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                      <select name="dataTable_length" v-model="Page.pageSize" @change="GetAll(1,this.Page.pageSize)" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -156,13 +157,13 @@
                   <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th><th rowspan="1" colspan="1">Tuỳ chọn</th></tr>
               </tfoot>
             <tbody>
-              <tr class="odd">
-                      <td class="sorting_1">Airi Satou</td>
-                      <td>Accountant</td>
-                      <td>Tokyo</td>
-                      <td>33</td>
-                      <td>2008/11/28</td>
-                      <td>$162,700</td>
+              <tr class="odd" :key="index" v-for="(User,index) in Page.items">
+                      <td class="sorting_1">{{User.username}}</td>
+                      <td>{{User.password}}</td>
+                      <td>{{User.email}}</td>
+                      <td>{{User.fullname}}</td>
+                      <td>{{User.phone}}</td>
+                      <td>{{User.createDate}}</td>
                       <td>
                         <router-link  to='/users/Userinfor' class="btn btn-warning btn-sm px-2 mx-1">
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
@@ -184,7 +185,17 @@
       </div>
     <div class="row">
       <div class="col-sm-12 col-md-5">
-      <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+      <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite"> Total {{this.Page.totalCount}} item</div></div>
+      <div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+        <ul class="pagination">
+          <li class="paginate_button page-item "
+          v-for="pageNumber in this.Page.totalPages" :key="pageNumber" @click="ChangePage(pageNumber)" 
+          :class="{active: pageNumber==this.Page.pageIndex}"
+          >
+          <a href="#" aria-controls="dataTable"  class="page-link">{{pageNumber}}</a>
+          </li>
+        </ul>
+        </div></div></div></div>
       </div>
     </div>
 </div>
@@ -198,50 +209,105 @@ export default {
   name: 'usersView',
   data(){
     return{
-      
+      Page:{
+        items:[],
+        totalCount:'',
+        pageIndex:'',
+        pageSize:'',
+        totalPages:'',
+      },
       User:{
-        Id:'',
-        UserName:'',
-        Password:'',
-        Email:'',
-        FullName:'',
-        Phone:''
+        _id:'',
+        username:'',
+        password:'',
+        email:'',
+        fullname:'',
+        phone:'',
+        createDate:''
+      },
+      UserSends:{
+        username:'',
+        password:'',
+        email:'',
+        fullname:'',
+        phone:'',
       },
        content:"Quản lý tài khoản",
        IsShowForm:false
     }
+  },
+  created(){
+    this.GetAll(1,25)
   },
   components: {
     InforUser
   },
   methods:{
     validate(){
-      if(!this.User.UserName)
+      if(!this.UserSends.username){
         alert('Username không được để trống')
-      else if(!this.User.Password)
+          return false
+        }
+     if(!this.UserSends.password){
         alert('vui lòng nhập mật khẩu')
-      else if(!this.User.Email)
-      alert('vui lòng nhập email')
-      else if(!this.User.FullName)
-      alert('vui lòng nhập Họ tên')
-       else if(!this.User.Phone)
-      alert('vui lòng nhập Số điện thoại')
-      
-      
+        return false
+        }
+       if(!this.UserSends.email){
+        alert('vui lòng nhập email')
+        return false
+      }
+       if(!this.UserSends.fullname){
+        alert('vui lòng nhập Họ tên')
+        return false
+       }
+        if(!this.UserSends.phone){
+          alert('vui lòng nhập Số điện thoại')
+          return false
+        }
+      if(!this.IsNumber(this.UserSends.phone)){
+        alert('số điện thoại phải là số')
+        return false
+      }
+       return true
+    },
+    ChangePage(index){
+        this.GetAll(index,this.Page.pageSize)  
+    },
+    IsNumber( value){
+      return /^\d*$/.test(value)
     },
     Save(){
-      this.validate()
-      console.log(this.User)
+     if( this.validate()){
+      console.log('data correct')
+      this.$request.post('https://localhost:7265/api/user',this.UserSends).then(res=>{
+        console.log(res.status)
+        if(res.status=='201'){
+          this.$router.push({name: 'users'})
+          this.IsShowForm=false
+          return
+          } 
+        alert('some thing is wrong!!!')
+      })
+     }
+    },
+    GetAll(pageindex,pagesize){
+      this.$request.get(`https://localhost:7265/api/Users?page=${pageindex}&size=${pagesize}`).then(res=>{
+        this.Page=res.data
+      })
     },
     Delete(){
       alert('Đã xoá')
     }
   }
- 
 }
 </script>
 <style  scoped>
 .Showtop{
 z-index: 100;
+}
+.row.justify-content-center {
+    position: fixed;
+    z-index: 33;
+    width: 80%;
 }
 </style>
