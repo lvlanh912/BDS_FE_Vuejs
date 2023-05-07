@@ -35,9 +35,9 @@ const routes = [
     component: ()=>import('../views/Sessions/SessionsView.vue')
   },
   {
-    path: '/users/Userinfor',
-    name: 'Userinfor',
-    component: ()=>import('../views/Users/InforUser.vue')
+    path: '/users/edit/:id',
+    name: 'user.edit',
+    component: ()=>import('../views/Users/Edit.vue')
   }
   
 ]
