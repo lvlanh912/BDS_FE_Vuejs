@@ -97,7 +97,7 @@
               <div class="col-sm-12 col-md-6">
                 <div class="dataTables_length" id="dataTable_length">
                   <label>Show 
-                      <select name="dataTable_length" v-model="Page.pageSize" @change="GetAll(1,this.Page.pageSize)" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
+                      <select name="dataTable_length" v-model="Page.pageSize" @change="GetAll(this.keyword,1,this.Page.pageSize)" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm">
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="50">50</option>
@@ -110,7 +110,7 @@
               <div class="col-sm-12 col-md-6 inline-flex">
                 <div id="dataTable_filter" class="dataTables_filter">
                   <label>Tìm kiếm:
-                    <input type="search" class="form-control form-control-sm" placeholder="Bạn cần tìm gì?" aria-controls="dataTable">
+                    <input type="search" v-model="keyword" @input="Search" class="form-control form-control-sm" placeholder="Bạn cần tìm gì?" aria-controls="dataTable">
                   </label>
                   <div class="my-3 float-right">
                 <button type="button" class="btn btn-success" @click="IsShowForm=!IsShowForm">
@@ -158,7 +158,9 @@
               </tfoot>
             <tbody>
               <tr class="odd" :key="index" v-for="(User,index) in Page.items">
-                      <td class="sorting_1">{{User.username}}</td>
+                      <td class="sorting_1">
+                        <router-link :to="{name:'user.infor',params:{id:User._id}}" class="nav-link"> {{User.username}}</router-link>
+                        </td>
                       <td>{{User.password}}</td>
                       <td>{{User.email}}</td>
                       <td>{{User.fullname}}</td>
@@ -208,6 +210,8 @@ export default {
   name: 'usersView',
   data(){
     return{
+       timer: null,
+      keyword:'',
       Page:{
         items:[],
         totalCount:'',
@@ -236,7 +240,7 @@ export default {
     }
   },
   created(){
-    this.GetAll(1,25)
+    this.GetAll('',1,25)
   },
   components: {
   },
@@ -295,7 +299,13 @@ export default {
       })
     },
     ChangePage(index){
-        this.GetAll(index,this.Page.pageSize)  
+        this.GetAll(this.keyword,index,this.Page.pageSize)  
+    },
+    Search(){
+      clearTimeout(this.timer);
+       this.timer= setTimeout(() => {
+       this.GetAll(this.keyword,1,this.Page.pageSize)
+      }, 1000)
     },
     IsNumber( value){
       return /^\d*$/.test(value)
@@ -314,10 +324,21 @@ export default {
       })
      }
     },
-    GetAll(pageindex,pagesize){
-      this.$request.get(`https://localhost:7265/api/Users?page=${pageindex}&size=${pagesize}`).then(res=>{
-        this.Page=res.data
+    GetAll(keyword,pageindex,pagesize){
+
+      if(keyword.length >=1){
+         this.$request.get(`https://localhost:7265/api/Users?keyword=${keyword}&page=${pageindex}&size=${pagesize}`).then(res=>{
+          this.Page=res.data
       })
+      }
+      else{
+         
+           this.$request.get(`https://localhost:7265/api/Users?page=${pageindex}&size=${pagesize}`).then(res=>{
+        this.Page=res.data
+              console.log(keyword)
+        return
+      })
+      }
     },
     Delete(){
       alert('Đã xoá')

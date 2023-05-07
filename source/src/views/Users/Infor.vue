@@ -2,14 +2,14 @@
      <!-- Form -->
         <div class="row justify-content-center">
             <div class="col-xl-10 col-lg-12 col-md-9">
-                <div class="card card-primary">
+                <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-12">
                 			<div class="p-5">
                                 <h4 class="nav-link" @click="goBack">Quay lại</h4>
 									<div class="text-center">
-										<h1 class="h4 text-gray-900 mb-4">Cập nhật thông tin tài khoản</h1>
+										<h1 class="h4 text-gray-900 mb-4">Thông tin tài khoản</h1>
 									</div>
 								<form @submit.prevent="Save">
 									<div class="form-group">
@@ -23,28 +23,30 @@
 									<div class="form-group">
 										<label >Password</label>
 										<input type="text" class="form-control" placeholder="Enter password"
-										v-model="User.password">
+										v-model="User.password" readonly>
 									</div>
 									<div class="form-group">
 										<label >Email address</label>
 										<input type="email" class="form-control" placeholder="Enter email"
-										v-model="User.email">
+										v-model="User.email" readonly>
 									</div>
 									<div class="form-group">
 										<label>Full Name</label>
 										<input type="text" class="form-control" placeholder="Enter FullName"
-										v-model="User.fullname">
+										v-model="User.fullname" readonly>
 									</div>
 									<div class="form-group">
 										<label>Phone</label>
-										<input type="tel" class="form-control" placeholder="Enter Phone Nummber" v-model="User.phone">
+										<input type="tel" class="form-control" placeholder="Enter Phone Nummber" v-model="User.phone" readonly>
 									</div>
 									<div class="form-group">
 										<label>Ngày tạo</label>
 										<input  class="form-control" v-model="User.createDate" readonly >
 									</div>
 									<div class="d-flex justify-content-center">
-										<button type="submit" class="btn btn-primary">Gửi</button>
+                                        <router-link  :to="{name:'user.edit',params:{id:User._id}}">
+										<button type="submit" class="btn btn-primary">Sửa</button>
+                                        </router-link>
 									</div>
 									</form>
 								</div>
@@ -86,27 +88,7 @@ methods:{
 		this.User=res.data
 	})
 	},
-	Save(){
-		this.$request.put(`https://localhost:7265/api/user?id=${this.User._id}`,this.User).then(res=>{
-			 if (res.status >= 200 && res.status < 300){
-				this.$swal.fire({
-				position: 'center',
-				icon: 'success',
-				title: 'Đã lưu',
-				showConfirmButton: false,
-				timer: 1500
-				})
-				//chuyển hướng sang trang thông tin chi tiết tài khoản
-				return
-			 }
-			this.$swal.fire({
-				icon: 'error',
-				title: 'Oops...',
-				text: 'Something went wrong!'
-				})
-		})
-	},
-	 goBack() {
+    goBack() {
       this.$router.go(-1);
     }
 }
