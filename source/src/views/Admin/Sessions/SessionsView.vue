@@ -1,8 +1,12 @@
 <template>
+ <div id="wrapper">
+  <ComHeader/>
+  <div id="content-wrapper" class="d-flex flex-column">
+<div id="content">
  <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">{{content}}</h1>
-    <p class="mb-4">Xem và xoá Session đăng nhập của trang web tại đây </p>
+    <p class="mb-4">Thêm sửa xoá, cập nhật tin tức của trang web tại đây </p>
 
     <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -99,11 +103,13 @@
     </div>
 </div>
 </div>
+    </div>
+</div>
+</div>
 </template>
-
 <script>
+import ComHeader from '../../../components/ComHeader.vue'
 // @ is an alias to /src
-
 export default {
   name: 'SessionsView',
   data(){
@@ -112,6 +118,7 @@ export default {
     }
   },
   components: {
+    ComHeader
   }
 }
 </script>

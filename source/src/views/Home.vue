@@ -7,10 +7,10 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: 'HomeView',
+  name: 'Home',
   data(){
     return{
-       content:"Đây là trang chủ admin"
+       content:"Đây là trang người dùng"
     }
   },
   components: {

@@ -1,9 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/Admin/HomeView.vue'
+import Home from '../views/Home.vue'
 const routes = [
   {
     path: '/',
     name: 'home',
+    component: Home
+  },
+  {
+    path: '/admin',
+    name: 'homeadmin',
     component: HomeView
   },
   {
@@ -12,37 +18,47 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin/AboutView.vue')
   },
   {
-    path: '/users',
+    path: '/Admin/users',
     name: 'users',
-    component: ()=>import('../views/Users/UsersView.vue')
+    component: ()=>import('../views/Admin/Users/UsersView.vue')
   },
   {
-    path: '/news',
+    path: '/Admin/news',
     name: 'news',
-    component: ()=>import('../views/News/NewsView.vue')
+    component: ()=>import('../views/Admin/News/NewsView.vue')
   },
   {
-    path: '/properties',
+    path: '/Admin/properties',
     name: 'properties',
-    component: ()=>import('../views/Properties/PropertiesView.vue')
+    component: ()=>import('../views/Admin/Properties/PropertiesView.vue')
   },
   {
-    path: '/sessions',
+    path: '/Admin/sessions',
     name: 'sessions',
-    component: ()=>import('../views/Sessions/SessionsView.vue')
+    component: ()=>import('../views/Admin/Sessions/SessionsView.vue')
   },
   {
-    path: '/users/edit/:id',
+    path: '/Admin/users/edit/:id',
     name: 'user.edit',
-    component: ()=>import('../views/Users/Edit.vue')
+    component: ()=>import('../views/Admin/Users/Edit.vue')
   },
   {
-    path: '/users/:id',
+    path: '/Admin/users/:id',
     name: 'user.infor',
-    component: ()=>import('../views/Users/Infor.vue')
+    component: ()=>import('../views/Admin/Users/Infor.vue')
+  },
+  {
+    path: '/Admin/news/edit/:id',
+    name: 'news.edit',
+    component: ()=>import('../views/Admin/News/Edit.vue')
+  },
+  {
+    path: '/Admin/news/:id',
+    name: 'news.infor',
+    component: ()=>import('../views/Admin/News/Infor.vue')
   }
   
 ]
