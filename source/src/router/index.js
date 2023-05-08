@@ -59,6 +59,26 @@ const routes = [
     path: '/Admin/news/:id',
     name: 'news.infor',
     component: ()=>import('../views/Admin/News/Infor.vue')
+  },
+  {
+    path: '/Admin/properties/edit/:id',
+    name: 'properties.edit',
+    component: ()=>import('../views/Admin/Properties/Edit.vue')
+  },
+  {
+    path: '/Admin/properties/:id',
+    name: 'properties.infor',
+    component: ()=>import('../views/Admin/Properties/Infor.vue')
+  },
+  {
+    path: '/Admin/login',
+    name: 'admin.login',
+    component: ()=>import('../views/Admin/Login.vue')
+  },
+  {
+    path: '/properties/:id',
+    name: 'ItemProperties.infor',
+    component: ()=>import('../views/ItemProperties.vue')
   }
   
 ]
