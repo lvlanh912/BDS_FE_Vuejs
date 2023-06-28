@@ -242,8 +242,14 @@ export default {
       this.$request.post('https://localhost:7265/api/news',this.Payload).then(res=>{
         console.log(res.status)
         if(res.status=='201'){
-          this.$router.push({name: 'news'})
-          this.IsShowForm=false
+                  this.$swal.fire(
+                  'Ok!',
+                  'Thêm thành công!',
+                  'success'
+                )
+                this.GetAll('',1,25)
+              this.$router.push({name: 'news'})
+              this.IsShowForm=false
           return
           } 
         alert('some thing is wrong!!!')

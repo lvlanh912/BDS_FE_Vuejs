@@ -31,7 +31,7 @@
     <div class="card card-solid">
   <div class="card-body pb-0 px-5">
     <div class="row ">
-      <div class="col-11 col-sm-6 col-md-4 d-flex align-items-stretch flex-column py-4 px-4" :key="index" v-for="(Properties,index) in Page.items">
+      <div class="card2 col-11 col-sm-6 col-md-4 d-flex align-items-stretch flex-column py-4 px-4" :key="index" v-for="(Properties,index) in Page.items">
         <div class="card bg-light d-flex flex-fill">
           <div class="card-body pt-0 px-0">
             <div class="row">
@@ -102,7 +102,7 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="list-group">
-                        <div class="list-group-item" :key="index" v-for="(News,index) in PageNews.items">
+                        <div class="list-group-item py-3" :key="index" v-for="(News,index) in PageNews.items">
                             <div class="row">
                                 <div class="col px-4">
                                     <div>
@@ -206,6 +206,9 @@ export default {
 .pr-img{
   width: 100%;
   height: 252px;
+}
+.card2 :hover{
+  background-color: rgba(227, 226, 237, 0.512);
 }
 .card-title{
     font-family: "Lexend Medium",Roboto,Arial !important;

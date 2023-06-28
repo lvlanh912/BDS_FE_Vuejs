@@ -14,6 +14,10 @@
 <script>
 import ComHeader from "../src/components/ComHeader.vue"
 export default {
+  created () {
+    if(localStorage.getItem('jwt')!=null)
+    this.$request.defaults.headers.common['Authorization'] = 'Bearer '+ localStorage.getItem('jwt')
+  },
   components: {
     ComHeader
 }

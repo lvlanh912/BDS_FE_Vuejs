@@ -19,6 +19,14 @@
 import ComHeader from '../../components/ComHeader.vue'
 // @ is an alias to /src
 export default {
+  created () {
+    console.log(this)
+    this.$request.post('https://localhost:7265/api/admin/profile').then(res=>{
+      this.content='xin chào,'+res.data
+      }).catch(()=>{
+        this.$router.push({ name: "admin.login" });
+      })
+  },
   name: 'HomeView',
   data(){
     return{

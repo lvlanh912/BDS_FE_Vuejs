@@ -273,6 +273,11 @@ export default {
           ).then(res=>{
         console.log(res.status)
         if(res.status=='201'){
+          this.$swal.fire(
+                  'Ok!',
+                  'Thêm thành công!',
+                  'success'
+                )
           this.$router.push({name: 'properties'})
           this.IsShowForm=false
           return
@@ -285,12 +290,17 @@ export default {
          this.$request.get(`https://localhost:7265/api/properties?keyword=${keyword}&page=${pageindex}&size=${pagesize}`).then(res=>{
           this.Page=res.data
       })
+      .catch(()=>{
+        this.$router.push({ name: 'admin.login' });
+      })
       }
       else{
            this.$request.get(`https://localhost:7265/api/properties?page=${pageindex}&size=${pagesize}`).then(res=>{
         this.Page=res.data
               console.log(keyword)
         return
+      }).catch(()=>{
+        this.$router.push({ name: 'admin.login' });
       })
       }
     },

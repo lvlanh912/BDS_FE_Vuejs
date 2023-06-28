@@ -63,7 +63,7 @@ export default {
 	data(){
 		return{
 			User:{
-				  _id:'',
+				  	_id:'',
 					username:'',
 					password:'',
 					email:'',
@@ -96,6 +96,7 @@ methods:{
 				showConfirmButton: false,
 				timer: 1500
 				})
+				this.$router.go(-1);
 				//chuyển hướng sang trang thông tin chi tiết tài khoản
 				return
 			 }

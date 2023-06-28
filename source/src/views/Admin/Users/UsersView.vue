@@ -296,6 +296,11 @@ export default {
       this.$request.post('https://localhost:7265/api/user',this.UserSends).then(res=>{
         console.log(res.status)
         if(res.status=='201'){
+          this.$swal.fire(
+                  'Ok!',
+                  'Thêm thành công!',
+                  'success'
+                )
           this.$router.push({name: 'users'})
           this.IsShowForm=false
           return
@@ -312,7 +317,6 @@ export default {
       })
       }
       else{
-         
            this.$request.get(`https://localhost:7265/api/Users?page=${pageindex}&size=${pagesize}`).then(res=>{
         this.Page=res.data
               console.log(keyword)
